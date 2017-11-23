@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using WeatherSample.Logic.DomainServices;
 using WeatherSample.Logic.Exceptions;
-using WeatherSampler.UnitTests.Mocks;
+using WeatherSample.UnitTests.Mocks;
 
-namespace WeatherSampler.UnitTests
+namespace WeatherSample.UnitTests
 {
     [TestFixture]
     public class WeatherServiceTests

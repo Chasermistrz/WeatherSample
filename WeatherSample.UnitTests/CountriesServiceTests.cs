@@ -2,7 +2,7 @@
 using WeatherSample.Logic.Common;
 using WeatherSample.Logic.DomainServices;
 
-namespace WeatherSampler.UnitTests
+namespace WeatherSample.UnitTests
 {
     [TestFixture]
     public class CountriesServiceTests

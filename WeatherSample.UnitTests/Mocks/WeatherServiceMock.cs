@@ -4,7 +4,7 @@ using WeatherSample.Logic.DomainObjects;
 using WeatherSample.Logic.DomainServices;
 using WeatherSample.Logic.Exceptions;
 
-namespace WeatherSampler.UnitTests.Mocks
+namespace WeatherSample.UnitTests.Mocks
 {
     public static class WeatherServiceMock
     {

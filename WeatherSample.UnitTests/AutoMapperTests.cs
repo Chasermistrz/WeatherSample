@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using WeatherSample.Logic.Common;
 
-namespace WeatherSampler.UnitTests
+namespace WeatherSample.UnitTests
 {
     [TestFixture]
     public class AutoMapperTests
