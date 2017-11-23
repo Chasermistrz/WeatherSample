@@ -1,0 +1,51 @@
+﻿<div ng-controller="WeatherController" ng-form="weatherForm">
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Weather application</h2>
+            <p class="bold">Please provide some details to start</p>
+
+            <div class="row">
+                <div class="col-md-3">Country</div>
+                <div class="col-md-6"><input type="text" ng-disabled="ctrl.showPleaseWait" ng-model="ctrl.country" /></div>
+            </div>
+            <div class="row top-padding">
+                <div class="col-md-3">City</div>
+                <div class="col-md-6"><input type="text" ng-disabled="ctrl.showPleaseWait" ng-model="ctrl.city" /></div>
+            </div>
+            <div class="row top-padding" ng-show="ctrl.locationNotFound">
+                <div class="col-md-3"><p class="red-font">Location not found...</p></div>
+            </div>
+            <div class="row top-padding" ng-show="ctrl.dataError.length > 0">
+                <div class="col-md-9"><p class="red-font bold">Failed to download weather data: {{ctrl.dataError}}</p></div>
+            </div>
+            <div class="row top-padding">
+                <div class="col-md-12"><input type="button" ng-value="ctrl.showPleaseWait ? 'Please wait...' : 'Check weather'" ng-click="ctrl.checkWeather()" ng-disabled="ctrl.showPleaseWait" /></div>
+            </div>
+        </div>
+        <div class="col-md-4" ng-show="ctrl.weatherData != null">
+            <h2>Results</h2>
+            <p class="bold">Weather results</p>
+
+            <div class="row">
+                <div class="col-md-5"><p>Country</p></div>
+                <div class="col-md-6"><p>{{ctrl.weatherData.Location.Country}}</p></div>
+            </div>
+            <div class="row top-small-padding">
+                <div class="col-md-5"><p>City</p></div>
+                <div class="col-md-6"><p>{{ctrl.weatherData.Location.City}}</p></div>
+            </div>
+            <div class="row top-small-padding">
+                <div class="col-md-5"><p>Temperature format</p></div>
+                <div class="col-md-6"><p>{{ctrl.weatherData.Temperature.Format}}</p></div>
+            </div>
+            <div class="row top-small-padding">
+                <div class="col-md-5"><p>Temperature value</p></div>
+                <div class="col-md-6"><p>{{ctrl.weatherData.Temperature.Value}}</p></div>
+            </div>
+            <div class="row top-small-padding">
+                <div class="col-md-5"><p>Humidity</p></div>
+                <div class="col-md-6"><p>{{ctrl.weatherData.Humidity}}</p></div>
+            </div>
+        </div>
+    </div>
+</div>
