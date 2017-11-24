@@ -1,74 +1,73 @@
-﻿using NUnit.Framework;
-using WeatherSample.Logic.DomainServices;
+﻿using WeatherSample.Logic.DomainServices;
 using WeatherSample.Logic.Exceptions;
+using Xunit;
 
 namespace WeatherSample.IntegrationTests
 {
-    [TestFixture]
     public class WeatherServiceTests
     {
-        private IWeatherService _weatherService;
-
-        [SetUp]
-        public void Configure()
+        private readonly IWeatherService _weatherService;
+        
+        public WeatherServiceTests()
         {
             Logic.Common.Container.Init();
             _weatherService = Logic.Common.Container.Resolve<IWeatherService>();
         }
 
-        [Test]
+        [Fact]
         public void Check_if_weather_service_returns_404_when_location_does_not_exist()
         {
-            Assert.Throws<LocationNotFoundException>(() => _weatherService.GetWeather("Not", "Existing"));
+            var exception = Record.Exception(() => _weatherService.GetWeather("Not", "Existing"));
+            Assert.IsType<LocationNotFoundException>(exception);
         }
 
-        [Test]
+        [Fact]
         public void Check_if_weather_service_has_all_properties_when_downloading_valid_data()
         {
-            Assert.DoesNotThrow(() => _weatherService.GetWeather("warsaw", "poland"));
+            var exception = Record.Exception(() => _weatherService.GetWeather("warsaw", "poland"));
+            Assert.Null(exception);
         }
 
-        [Test]
+        [Fact]
         public void Check_if_weather_service_returns_valid_country()
         {
             var weatherObject = _weatherService.GetWeather("warsaw", "poland");
 
-            Assert.That(weatherObject, Is.Not.Null);
-            Assert.That(weatherObject.Location, Is.Not.Null);
-            Assert.That(weatherObject.Location.Country, Is.Not.Null);
-            Assert.That(weatherObject.Location.Country.ToLower(), Is.EqualTo("pl"));
+            Assert.NotNull(weatherObject);
+            Assert.NotNull(weatherObject.Location);
+            Assert.NotNull(weatherObject.Location.Country);
+            Assert.Equal("pl", weatherObject.Location.Country.ToLower());
         }
 
-        [Test]
+        [Fact]
         public void Check_if_weather_service_returns_valid_city()
         {
             var weatherObject = _weatherService.GetWeather("warsaw", "poland");
 
-            Assert.That(weatherObject, Is.Not.Null);
-            Assert.That(weatherObject.Location, Is.Not.Null);
-            Assert.That(weatherObject.Location.City, Is.Not.Null);
-            Assert.That(weatherObject.Location.City.ToLower(), Is.EqualTo("warsaw"));
+            Assert.NotNull(weatherObject);
+            Assert.NotNull(weatherObject.Location);
+            Assert.NotNull(weatherObject.Location.City);
+            Assert.Equal("warsaw", weatherObject.Location.City.ToLower());
         }
 
-        [Test]
+        [Fact]
         public void Check_if_weather_service_has_valid_temperature_format()
         {
             var weatherObject = _weatherService.GetWeather("warsaw", "poland");
 
-            Assert.That(weatherObject, Is.Not.Null);
-            Assert.That(weatherObject.Temperature, Is.Not.Null);
-            Assert.That(weatherObject.Temperature.Format, Is.Not.Null);
-            Assert.That(weatherObject.Temperature.Format.ToLower(), Is.EqualTo("celsius"));
+            Assert.NotNull(weatherObject);
+            Assert.NotNull(weatherObject.Temperature);
+            Assert.NotNull(weatherObject.Temperature.Format);
+            Assert.Equal("celsius", weatherObject.Temperature.Format.ToLower());
         }
 
-        [Test]
+        [Fact]
         public void Check_if_weather_service_has_valid_temperature()
         {
             var weatherObject = _weatherService.GetWeather("warsaw", "poland");
 
-            Assert.That(weatherObject, Is.Not.Null);
-            Assert.That(weatherObject.Temperature, Is.Not.Null);
-            Assert.That(weatherObject.Temperature.Value, Is.Not.Null);
+            Assert.NotNull(weatherObject);
+            Assert.NotNull(weatherObject.Temperature);
         }
     }
 }

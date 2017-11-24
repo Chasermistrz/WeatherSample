@@ -1,18 +1,16 @@
-﻿using NUnit.Framework;
-using WeatherSample.Logic.Common;
+﻿using WeatherSample.Logic.Common;
+using Xunit;
 
 namespace WeatherSample.UnitTests
 {
-    [TestFixture]
     public class AutoMapperTests
     {
-        [SetUp]
-        public void Configure()
+        public AutoMapperTests()
         {
             AutoMapper.Init();
         }
 
-        [Test]
+        [Fact]
         public void Check_if_AutoMapper_has_valid_configuration()
         {
             AutoMapper.CheckConfiguration();
